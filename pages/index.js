@@ -9,7 +9,6 @@ const IndexContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 10px;
-  font-family: "Open Sans", sans-serif;
 `
 
 const HeaderContainer = styled.div`
