@@ -47,11 +47,12 @@ const Panel = styled.div`
     opacity: ${(props) => (props.isActive ? "1" : "0")};
   }
 `
+
 const ExpandingCards = () => {
   const [isActive, setIsActive] = useState(false)
 
-  const handleClick = () => {
-    setIsActive(!isActive)
+  const handleClick = (e) => {
+    console.log(e)
   }
 
   return (
@@ -61,7 +62,7 @@ const ExpandingCards = () => {
       </Head>
       <Container>
         <Panel
-          onClick={handleClick}
+          onClick={(e) => handleClick(e)}
           backgroundImage="https://images.unsplash.com/photo-1558979158-65a1eaa08691?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
           isActive={isActive}
         >
