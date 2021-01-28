@@ -20,21 +20,23 @@ const PanelContainer = styled.div`
       display: none;
     }
   }
+
   h3 {
     font-size: 24px;
     position: absolute;
     bottom: 20px;
     left: 20px;
     margin: 0;
-    opacity: 0;
+    opacity: ${(props) => (props.active ? "1" : "0")};
+    transition: opacity 0.3s ease-in 0.4s;
   }
 `
 
-const Panel = ({ backgroundImage, onClick, active }) => {
+const Panel = ({ backgroundImage, active, onClick }) => {
   return (
     <PanelContainer
-      active={active}
       onClick={onClick}
+      active={active}
       backgroundImage={backgroundImage}
     >
       <h3>Explore The World</h3>
