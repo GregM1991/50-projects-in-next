@@ -22,6 +22,17 @@ const ProgressContainer = styled.div`
   margin-bottom: 30px;
   max-width: 100%;
   width: 350px;
+
+  &:before {
+    content: "";
+    background-color: #e0e0e0;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 100%;
+  }
 `
 
 const Progress = styled.div`
@@ -31,24 +42,13 @@ const Progress = styled.div`
   left: 0;
   transform: translateY(-50%);
   height: 4px;
-  width: 100%;
-  z-index: -1;
-
-  &::before {
-    content: "";
-    background-color: #e0e0e0;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    height: 4px;
-    width: 50%;
-    z-index: -1;
-    transition: 0.4s ease;
-  }
+  width: 50%;
+  transition: 0.4s ease;
 `
 
-const Circle = styled.div``
+const Circle = styled.div`
+  z-index: 1;
+`
 
 const Btn = styled.button``
 
