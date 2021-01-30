@@ -10,10 +10,9 @@ const Container = styled.div`
   height: 100vh;
   overflow: hidden;
   margin: 0;
+
   @media (max-width: 480px) {
-    container {
-      width: 100vw;
-    }
+    width: 100vw;
   }
 `
 

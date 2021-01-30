@@ -14,6 +14,7 @@ const PanelContainer = styled.div`
   margin: 10px;
   position: relative;
   transition: flex 0.7s ease-in;
+
   @media (max-width: 480px) {
     &:nth-of-type(4),
     &:nth-of-type(5) {
@@ -29,6 +30,7 @@ const PanelContainer = styled.div`
     margin: 0;
     opacity: ${(props) => (props.active ? "1" : "0")};
     transition: opacity 0.3s ease-in 0.4s;
+    color: white;
   }
 `
 
