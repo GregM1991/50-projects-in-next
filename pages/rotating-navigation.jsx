@@ -1,6 +1,6 @@
 import React from "react"
 import Head from "next/Head"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 const Body = styled.div`
   overflow: x-hidden;
@@ -24,11 +24,38 @@ const CircleContainer = styled.div`
   left: -100px;
 `
 
-const Circle = styled.div``
+const Circle = styled.div`
+  background-color: #ff7979;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  position: relative;
+  transition: 0.5s linear;
+`
 
-const CloseBtn = styled.button``
+const ButtonBase = css`
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 100px;
+  background: transparent;
+  border: 0;
+  font-size: 26px;
+  color: #fff;
 
-const OpenBtn = styled.button``
+  &:focus {
+    outline: none;
+  }
+`
+
+const CloseBtn = styled.button`
+  ${ButtonBase}
+`
+
+const OpenBtn = styled.button`
+  ${ButtonBase}
+`
 
 const Content = styled.div``
 
