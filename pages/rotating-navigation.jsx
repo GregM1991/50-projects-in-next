@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Head from "next/Head"
 import styled, { css } from "styled-components"
 
@@ -30,34 +30,32 @@ const Circle = styled.div`
   width: 200px;
   border-radius: 50%;
   position: relative;
-  transition: 0.5s linear;
+  transition: transform 0.5s linear;
 `
 
-const ButtonBase = css`
+const NavButton = styled.button`
   cursor: pointer;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: ${(props) => (props.isOpen ? "50%" : "40%")};
+  left: ${(props) => (props.isOpen ? "60%" : "30%")};
   height: 100px;
   background: transparent;
   border: 0;
   font-size: 26px;
   color: #fff;
+  transform: ${(props) => (props.isOpen ? "none" : "rotate(90deg)")};
+  transform-origin: top left;
 
   &:focus {
     outline: none;
   }
 `
 
-const CloseBtn = styled.button`
-  ${ButtonBase}
+const Content = styled.div`
+  img {
+    max-width: 100%;
+  }
 `
-
-const OpenBtn = styled.button`
-  ${ButtonBase}
-`
-
-const Content = styled.div``
 
 const Nav = styled.nav``
 
@@ -66,6 +64,8 @@ const NavUL = styled.ul``
 const NavItem = styled.li``
 
 const RotatingNavigation = () => {
+  const [isOpen, setIsOpen] = useState(true)
+
   return (
     <>
       <Head>
@@ -81,12 +81,12 @@ const RotatingNavigation = () => {
         <Container showNav={false}>
           <CircleContainer>
             <Circle>
-              <CloseBtn>
+              <NavButton isOpen={!isOpen} onClick={() => setIsOpen(!isOpen)}>
                 <i class="fas fa-times"></i>
-              </CloseBtn>
-              <OpenBtn>
+              </NavButton>
+              <NavButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
                 <i class="fas fa-bars"></i>
-              </OpenBtn>
+              </NavButton>
             </Circle>
           </CircleContainer>
 
