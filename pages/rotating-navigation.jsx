@@ -31,13 +31,19 @@ const Circle = styled.div`
   border-radius: 50%;
   position: relative;
   transition: transform 0.5s linear;
+
+  ${(props) =>
+    props.showNav &&
+    css`
+      transform: rotate(-70deg);
+    `}
 `
 
-const NavButton = styled.button`
+const NavButtonBase = css`
   cursor: pointer;
   position: absolute;
-  top: ${(props) => (props.isOpen ? "50%" : "40%")};
-  left: ${(props) => (props.isOpen ? "60%" : "30%")};
+  top: 50%;
+  left: 50%;
   height: 100px;
   background: transparent;
   border: 0;
@@ -51,20 +57,95 @@ const NavButton = styled.button`
   }
 `
 
+const NavButtonOpen = styled.button`
+  ${NavButtonBase};
+  ${(props) =>
+    props.isOpen &&
+    css`
+      left: 60%;
+    `}
+`
+
+const NavButtonClose = styled.button`
+  ${NavButtonBase};
+  ${(props) =>
+    !props.isOpen &&
+    css`
+      top: 60%;
+      transform: rotate(90deg);
+      tarnsform-origin: top left;
+    `}
+`
+
 const Content = styled.div`
+  max-width: 1000px;
+  margin: 50px auto;
+
+  h1 {
+    margin: 0;
+  }
+
+  small {
+    color: #555;
+    font-style: italic;
+  }
+
+  p {
+    color: #333;
+    line-height: 1.5;
+  }
+
   img {
     max-width: 100%;
   }
 `
 
-const Nav = styled.nav``
+const Nav = styled.nav`
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+  z-index: 100;
+`
 
-const NavUL = styled.ul``
+const NavUL = styled.ul`
+  list-style-type: none;
+  padding-left: 30px;
 
-const NavItem = styled.li``
+  ${(props) =>
+    props.showNav &&
+    `
+    & li {
+      transform: translateX(0) !important;
+      transition-delay: 0.3s;
+    }
+  `}
+`
+
+const NavItem = styled.li`
+  text-transform: uppercase;
+  color: #fff;
+  margin: 40px 0;
+  transform: translateX(-100%);
+  transition: transform 0.4s ease-in;
+
+  i {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+
+  & + & {
+    margin-left: 15px;
+    transform: translateX(-150%);
+  }
+
+  & + & + & {
+    margin-left: 30px;
+    transform: translateX(-200%);
+  }
+`
 
 const RotatingNavigation = () => {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <>
@@ -78,15 +159,15 @@ const RotatingNavigation = () => {
         />
       </Head>
       <Body>
-        <Container showNav={false}>
+        <Container showNav={isOpen}>
           <CircleContainer>
             <Circle>
-              <NavButton isOpen={!isOpen} onClick={() => setIsOpen(!isOpen)}>
+              <NavButtonOpen isOpen={isOpen} onClick={() => setIsOpen(true)}>
                 <i class="fas fa-times"></i>
-              </NavButton>
-              <NavButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+              </NavButtonOpen>
+              <NavButtonClose isOpen={!isOpen} onClick={() => setIsOpen(false)}>
                 <i class="fas fa-bars"></i>
-              </NavButton>
+              </NavButtonClose>
             </Circle>
           </CircleContainer>
 
@@ -125,7 +206,7 @@ const RotatingNavigation = () => {
         </Container>
 
         <Nav>
-          <NavUL>
+          <NavUL showNav={isOpen}>
             <NavItem>
               <i class="fas fa-home"></i> Home
             </NavItem>
