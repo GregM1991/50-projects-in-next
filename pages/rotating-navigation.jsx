@@ -42,14 +42,14 @@ const Circle = styled.div`
 const NavButtonBase = css`
   cursor: pointer;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 48%;
+  left: 62%;
   height: 100px;
   background: transparent;
   border: 0;
   font-size: 26px;
   color: #fff;
-  transform: ${(props) => (props.isOpen ? "none" : "rotate(90deg)")};
+  transform: ${(props) => (props.isOpen ? "rotate(70deg)" : "rotate(0deg)")};
   transform-origin: top left;
 
   &:focus {
@@ -62,7 +62,7 @@ const NavButtonOpen = styled.button`
   ${(props) =>
     props.isOpen &&
     css`
-      left: 60%;
+      left: 80%;
     `}
 `
 
@@ -163,10 +163,11 @@ const RotatingNavigation = () => {
           <CircleContainer>
             <Circle>
               <NavButtonOpen isOpen={isOpen} onClick={() => setIsOpen(true)}>
-                <i class="fas fa-times"></i>
-              </NavButtonOpen>
-              <NavButtonClose isOpen={!isOpen} onClick={() => setIsOpen(false)}>
                 <i class="fas fa-bars"></i>
+              </NavButtonOpen>
+
+              <NavButtonClose isOpen={!isOpen} onClick={() => setIsOpen(false)}>
+                <i class="fas fa-times"></i>
               </NavButtonClose>
             </Circle>
           </CircleContainer>
