@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import Head from "next/Head"
 import styled, { css } from "styled-components"
 
+//TODO: NEED TO FIX UP HOW THE BUTTONS ROTATE
+
 const Body = styled.div`
   overflow: x-hidden;
   background-color: #333;
@@ -158,6 +160,7 @@ const RotatingNavigation = () => {
           crossorigin="anonymous"
         />
       </Head>
+
       <Body>
         <Container showNav={isOpen}>
           <CircleContainer>
