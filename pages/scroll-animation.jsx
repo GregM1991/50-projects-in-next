@@ -28,6 +28,14 @@ const Box = styled.div`
   box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.3);
   transform: ${props => (props.show ? "translateX(0)" : "translateX(400%)")};
   transition: transform 0.4s ease;
+
+  &:nth-of-type(even) {
+    transform: ${props => (props.show ? "translateX(0)" : "translateX(-400%)")};
+  }
+
+  h2 {
+    font-size: 42px;
+  }
 `
 
 const ScrollAnimation = () => {
@@ -42,7 +50,7 @@ const ScrollAnimation = () => {
         <Box show={true}>
           <h2>Content</h2>
         </Box>
-        <Box>
+        <Box show={true}>
           <h2>Content</h2>
         </Box>
         <Box>
