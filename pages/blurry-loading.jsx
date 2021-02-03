@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import styled from "styled-components"
-import Head from "next/Head"
+import Head from "next/head"
 
 const Body = styled.div`
   background-color: #f6f7fb;
