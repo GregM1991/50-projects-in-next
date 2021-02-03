@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Head from "next/Head"
+import Head from "next/head"
 import styled, { css } from "styled-components"
 
 //TODO: NEED TO FIX UP HOW THE BUTTONS ROTATE
@@ -13,7 +13,7 @@ const Body = styled.div`
 
 const Container = styled.div`
   background-color: #fafafa;
-  transform: ${(props) => (props.showNav ? "rotate(-20deg)" : "0")};
+  transform: ${props => (props.showNav ? "rotate(-20deg)" : "0")};
   transform-origin: top left;
   transition: transform 0.5s linear;
   width: 100vw;
@@ -34,7 +34,7 @@ const Circle = styled.div`
   position: relative;
   transition: transform 0.5s linear;
 
-  ${(props) =>
+  ${props =>
     props.showNav &&
     css`
       transform: rotate(-70deg);
@@ -51,7 +51,7 @@ const NavButtonBase = css`
   border: 0;
   font-size: 26px;
   color: #fff;
-  transform: ${(props) => (props.isOpen ? "rotate(70deg)" : "rotate(0deg)")};
+  transform: ${props => (props.isOpen ? "rotate(70deg)" : "rotate(0deg)")};
   transform-origin: top left;
 
   &:focus {
@@ -61,7 +61,7 @@ const NavButtonBase = css`
 
 const NavButtonOpen = styled.button`
   ${NavButtonBase};
-  ${(props) =>
+  ${props =>
     props.isOpen &&
     css`
       left: 80%;
@@ -70,7 +70,7 @@ const NavButtonOpen = styled.button`
 
 const NavButtonClose = styled.button`
   ${NavButtonBase};
-  ${(props) =>
+  ${props =>
     !props.isOpen &&
     css`
       top: 60%;
@@ -113,7 +113,7 @@ const NavUL = styled.ul`
   list-style-type: none;
   padding-left: 30px;
 
-  ${(props) =>
+  ${props =>
     props.showNav &&
     `
     & li {

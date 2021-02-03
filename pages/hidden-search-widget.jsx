@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Head from "next/Head"
+import Head from "next/head"
 import styled, { css } from "styled-components"
 
 const Body = styled.div`
@@ -23,7 +23,7 @@ const Input = styled.input`
   font-size: 18px;
   padding: 15px;
   height: 50px;
-  width: ${(props) => (props.isActive ? "200px" : "50px")};
+  width: ${props => (props.isActive ? "200px" : "50px")};
   transition: width 0.3s ease;
 
   &:focus {
@@ -42,7 +42,7 @@ const Button = styled.button`
   height: 50px;
   width: 50px;
   transition: transform 0.3s ease;
-  ${(props) =>
+  ${props =>
     props.isActive &&
     css`
       transform: translateX(198px);
