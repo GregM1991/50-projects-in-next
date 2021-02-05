@@ -1,6 +1,7 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import styled from "styled-components"
 import Head from "next/head"
+import { useScrollPosition } from "../custom-hooks/useScrollPosition"
 
 const Body = styled.div`
   background-color: #efedd6;
@@ -43,9 +44,34 @@ const Box = styled.div`
 // once the bottom of the rect passes over the bottom of the screen, switch a bit of state
 // that then triggers the animation to come into place
 
+// Need to implement some sort of custom hook to take in the scroll positions and spit out rerenders that don't tank my performance
+
 const ScrollAnimation = () => {
   const [show, setShow] = useState(false)
-  // Need to implement some sort of custom hook to take in the scroll positions and spit out rerenders that don't tank my performance
+  const [hideOnScroll, setHideOnScroll] = useState(true)
+
+  const [elementPosition, setElementPosition] = useState({ x: 20, y: 150 })
+  const elementRef = useRef(null)
+
+  useScrollPosition(
+    ({ currPos }) => {
+      console.log(currPos, window.innerHeight * 0.5)
+      const triggerBottom = window.innerHeight * 0.25
+      if (currPos.y > triggerBottom) {
+        console.log("Setting show to false")
+        setShow(true)
+      } else {
+        console.log("Setting to true")
+        setShow(false)
+      }
+      setElementPosition(currPos)
+    },
+    [],
+    elementRef,
+    false,
+    300
+  )
+
   return (
     <>
       <Head>
@@ -53,7 +79,7 @@ const ScrollAnimation = () => {
       </Head>
       <Body>
         <h1>Scroll to see the animation!</h1>
-        <Box show={show}>
+        <Box show={show} ref={elementRef}>
           <h2>Content</h2>
         </Box>
         <Box show={show}>
