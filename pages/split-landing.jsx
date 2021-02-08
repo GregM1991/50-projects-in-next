@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import styled, { css } from "styled-components"
 import Head from "next/head"
 
@@ -23,6 +23,10 @@ const Container = styled.div`
     transform: translateX(-50%);
     white-space: nowrap;
   }
+
+  // hover-left
+  //   width: 75%;
+  //   other-width: 25%;
 `
 
 const SplitBase = css`
@@ -38,6 +42,8 @@ const SplitLeft = styled.div`
   background: url("https://github.com/bradtraversy/50projects50days/blob/master/split-landing-page/ps.jpg?raw=true");
   background-repeat: no-repeat;
   background-size: cover;
+  ${props =>
+    props.isFocused === "0" ? "50%" : props.isFocused === "1" ? "75%" : "25%"};
 
   &::before {
     content: "";
@@ -54,6 +60,8 @@ const SplitRight = styled.div`
   background: url("https://github.com/bradtraversy/50projects50days/blob/master/split-landing-page/xbox.jpg?raw=true");
   background-repeat: no-repeat;
   background-size: cover;
+  width: ${props =>
+    props.isFocused === "0" ? "50%" : props.isFocused === "1" ? "25%" : "75%"};
 
   &::before {
     content: "";
@@ -94,6 +102,11 @@ const BuyNowButton = styled.a`
 `
 
 const ProjectTemplate = () => {
+  const [mouseOver, setMouseOver] = useState("0")
+  const mouseOutHandler = () => {
+    setMouseOver("0")
+    console.log("MouseOut Fired", mouseOver)
+  }
   return (
     <>
       <Head>
@@ -101,11 +114,19 @@ const ProjectTemplate = () => {
       </Head>
       <Body>
         <Container>
-          <SplitLeft>
+          <SplitLeft
+            onMouseOver={() => setMouseOver("1")}
+            isFocused={mouseOver}
+            onMouseOut={mouseOutHandler}
+          >
             <h1>Playstation 5</h1>
             <BuyNowButton>Buy Now</BuyNowButton>
           </SplitLeft>
-          <SplitRight>
+          <SplitRight
+            onMouseOver={() => setMouseOver("2")}
+            isFocused={mouseOver === "2"}
+            onMouseOut={mouseOutHandler}
+          >
             <h1>Xbox Series X</h1>
             <BuyNowButton hoverColor="green">Buy Now</BuyNowButton>
           </SplitRight>
