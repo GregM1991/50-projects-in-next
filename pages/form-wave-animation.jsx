@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, useEffect, useState } from "react"
 import styled, { css } from "styled-components"
 import Head from "next/head"
 
@@ -41,6 +41,7 @@ const inputBase = css`
   &:focus,
   & input:valid {
     outline: 0;
+    border-bottom-color: lightblue;
   }
 `
 
@@ -61,6 +62,19 @@ const FormControl = styled.div`
 
   label {
     ${labelBase}
+  }
+
+  label span {
+    display: inline-block;
+    font-size: 18px;
+    min-width: 5px;
+    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  input:focus + label span,
+  input:valid + label span {
+    color: lightblue;
+    transform: translateY(-30px);
   }
 `
 
@@ -89,11 +103,27 @@ const TextPara = styled.p`
 `
 
 const ProjectTemplate = () => {
-  const labelRefs = useRef([])
+  const labelRef1 = useRef(null)
+  const labelRef2 = useRef(null)
 
-  labelRefs.current = [0, 0].map((ref, index) => {
-    labelRefs.current[index] = React.createRef()
-  })
+  useEffect(() => {
+    const labelSpanInjector = ref => {
+      if (ref) {
+        const newRef = ref.current.innerText
+          .split("")
+          .map(
+            (letter, idx) =>
+              `<span style="transition-delay: ${idx * 30}ms">${letter}</span>`
+          )
+          .join("")
+
+        return newRef
+      }
+    }
+
+    labelRef1.current.innerHTML = labelSpanInjector(labelRef1)
+    labelRef2.current.innerHTML = labelSpanInjector(labelRef2)
+  }, [labelRef1, labelRef2])
 
   return (
     <>
@@ -106,14 +136,13 @@ const ProjectTemplate = () => {
           <form>
             <FormControl>
               <input type="text" required />
-              <label ref={labelRefs[0]}>Email</label>
+              <label ref={labelRef1}>Email</label>
             </FormControl>
             <FormControl>
-              <input ref={labelRefs[1]} type="password" required />
-              <label>Password</label>
+              <input type="password" required />
+              <label ref={labelRef2}>Password</label>
             </FormControl>
           </form>
-          {console.log(labelRefs)}
           <LoginButton>Login</LoginButton>
           <TextPara>
             Don't have an account?<a href="#"> Register</a>
