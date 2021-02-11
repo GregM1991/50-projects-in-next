@@ -64,7 +64,13 @@ const DadJokes = () => {
   const [dadJoke, setDadJoke] = useState("")
 
   const getDadJoke = () => {
-    axios.get(getDadJokeURL).then(res => console.log(res))
+    axios
+      .get(getDadJokeURL, {
+        headers: {
+          Accept: "application/json",
+        },
+      })
+      .then(res => setDadJoke(res.data.joke))
   }
   return (
     <>
@@ -74,7 +80,11 @@ const DadJokes = () => {
       <Body>
         <Container>
           <h3>Don't Laugh Challenge</h3>
-          <Joke>{dadJoke}</Joke>
+          <Joke>
+            {dadJoke.length > 0
+              ? dadJoke
+              : "Click the button to receive the best goddamn dad joke you ever did hear"}
+          </Joke>
           <JokeButton onClick={getDadJoke}>Get Another Joke</JokeButton>
         </Container>
       </Body>
