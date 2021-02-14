@@ -42,11 +42,12 @@ const Title = styled.h3`
 `
 
 const Text = styled.p`
-  display: ${props => (props.isActive ? "block" : "none")};
+  display: block;
+  margin: 30px 0 0;
 `
 
 const Toggle = styled.button`
-  background-color: transparent;
+  background-color: ${props => (props.isActive ? "#9fa4a8" : "transparent")};
   border: 0;
   border-radius: 50%;
   cursor: pointer;
@@ -66,32 +67,23 @@ const Toggle = styled.button`
   }
 
   & .fa-times {
-    display: none;
-    ${props =>
-      props.isActive &&
-      css`
-        color: #fff;
-        display: block;
-      `}
+    color: #fff;
+    display: block;
 
   & .fa-chevron down {
-    display: none;
-    ${props =>
-      props.isActive &&
-      css`
-        background-color: #9fa4a8;
-      `}
+    background-color: #9fa4a8;
   }
 `
 
-const FAQComponent = ({ title, text }) => (
-  <FAQ>
-    <Title>{title}</Title>
-    <Text>{text}</Text>
-    <Toggle>
-      <i class="fas fa-chevron-down"></i>
-      <i class="fas fa-times"></i>
-    </Toggle>
+const FAQComponent = ({ title, text, isActive, handleClick }) => (
+  <FAQ isActive={isActive}>
+    <Title isActive={isActive}>{title}</Title>
+    {isActive && <Text>{text}</Text>}
+    {!isActive && (
+      <Toggle isActive={isActive} onClick={handleClick}>
+        <i class="fas fa-chevron-down"></i>
+      </Toggle>
+    )}
   </FAQ>
 )
 
