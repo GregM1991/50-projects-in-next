@@ -34,7 +34,15 @@ const TextArea = styled.textarea`
 
 const Tags = styled.div``
 
-const Tag = styled.span``
+const Tag = styled.span`
+  background-color: #f0932b;
+  color: #fff;
+  border-radius: 50px;
+  padding: 10px 20px;
+  margin: 0 5px 10px 0;
+  font-size: 14px;
+  display: inline-block;
+`
 
 const RandomChoicePicker = () => {
   return (
